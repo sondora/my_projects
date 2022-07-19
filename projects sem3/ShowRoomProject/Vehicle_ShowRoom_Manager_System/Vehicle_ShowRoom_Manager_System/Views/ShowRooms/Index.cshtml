@@ -1,0 +1,75 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Vehicle_ShowRoom_Manager_System.Models.ShowRoom>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="containerr">
+    <h2 class="h2">ShowRoom</h2>
+
+    <p>
+        <button class="btn btn-default">
+            @Html.ActionLink("Create New", "Create")
+        </button>
+
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().RoomAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().RoomName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Admin.AdminName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Customer.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Vehicle.VehicleName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Admin.AdminName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vehicle.VehicleName)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "ShowRooms", new { id = item.RoomId })" class="btn btn-sm btn-success" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="@Url.Action("Details", "ShowRooms", new { id = item.RoomId })" class="btn btn-sm btn-warning" title="Details"><i class="fa-solid fa-eye"></i></a>
+                    <a href="@Url.Action("Delete", "ShowRooms", new { id = item.RoomId })" class="btn btn-sm btn-danger" title="Delete"><i class="fa-solid fa-trash-can"></i></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

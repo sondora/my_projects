@@ -1,0 +1,148 @@
+﻿@model IEnumerable<Vehicle_ShowRoom_Manager_System.Models.VehicleImg>
+
+@{
+    ViewBag.Title = "Car Detail";
+}
+
+<div class="login-form-container">
+
+    <span id="close-login-form" class="fas fa-times"></span>
+
+    <form action="">
+        <h3>user login</h3>
+        <input type="email" placeholder="email" class="box">
+        <input type="password" placeholder="password" class="box">
+        <input type="submit" value="login" class="btn">
+    </form>
+
+</div>
+<div class="body">
+    <div class="flex-box">
+        @*@<div class="left">
+            <div class="col-2">
+                <img src="@Html.DisplayFor(model => model.FirstOrDefault().ImgPath)" id="ProductImg">
+                <div class="small-img-row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="small-img-col">
+                            <img src="@Html.DisplayFor(model => model.FirstOrDefault().ImgPath)" width="100%" class="small-img">
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        *@
+        <div class="left">
+            <div class="slider">
+                <div class="slides">
+
+                    @{int num = 0;
+                        string id, c;}
+
+                    @foreach (var item in Model)
+                    {
+                        num++;
+                        id = "radio" + num.ToString();
+                        <input type="radio" name="radio-btn" id="@id">
+                    }
+                    @*
+        <input type="radio" name="radio-btn" id="radio1">
+        <input type="radio" name="radio-btn" id="radio2">
+        <input type="radio" name="radio-btn" id="radio3">
+        <input type="radio" name="radio-btn" id="radio4">
+                    *@
+                    @{num = 0;}
+                    @foreach (var item in Model)
+                    {
+                        if (num == 0)
+                        {
+                            <div class="slide first">
+                                <img src="@Html.DisplayFor(modelItem => item.ImgPath)" alt="">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="slide">
+                                <img src="@Html.DisplayFor(modelItem => item.ImgPath)" alt="">
+                            </div>
+                        }
+                        num++;
+
+                    }
+                    @*
+        <div class="slide first">
+            <img src="~/image/Car1.jpg" alt="">
+        </div>
+        <div class="slide">
+            <img src="~/image/xe2.jpg" alt="">
+        </div>
+        <div class="slide">
+            <img src="~/image/xe3.jpg" alt="">
+        </div>
+        <div class="slide">
+            <img src="~/image/xe4.jpg" alt="">
+        </div>
+                    *@
+                    <div class="navigation-auto">
+                        @{num = 0;}
+                        @foreach (var item in Model)
+                        {
+                            num++;
+                            c = "auto-btn" + num.ToString();
+                            <div class="@c"></div>
+                        }
+                        @*
+            <div class="auto-btn1"></div>
+            <div class="auto-btn2"></div>
+            <div class="auto-btn3"></div>
+            <div class="auto-btn4"></div>
+                        *@
+                    </div>
+                </div>
+                <div class="navigation-manual">
+                    @{num = 0;} 
+                    @foreach (var item in Model)
+                    {
+                        num++;
+                        c = "radio" + num.ToString();
+                        <label for="@c" class="manual-btn"></label>
+                    }
+                    @*
+                    <label for="radio1" class="manual-btn"></label>
+                    <label for="radio2" class="manual-btn"></label>
+                    <label for="radio3" class="manual-btn"></label>
+                    <label for="radio4" class="manual-btn"></label>
+                    *@
+                </div>
+            </div>
+
+        </div>
+        <div class="right">
+            <div class="pname">@Html.DisplayFor(model => model.FirstOrDefault().Vehicle.VehicleName)</div>
+            <div class="localtion util__spacing-bottom-1">
+                <div class="localtion-item">
+                    <i class="localtion-icon fa fa-map-pin" aria-hidden="true"></i>
+                    <span class="localtion-text">Viet Nam</span>
+                </div>
+                <div class="localtion-item">
+                    <i class="localtion-icon fa fa-truck" aria-hidden="true"></i>
+                    <span class="localtion-text">Home delivery available</span>
+                </div>
+            </div>
+
+            <h2>@Html.DisplayFor(model => model.FirstOrDefault().Vehicle.Price) vnd</h2>
+            <span class="price-lable">Cash Price</span>
+            <hr />
+            <h2>Vehicle Description</h2>
+            <div class="dtext">
+                <span class="text">
+                    @Html.DisplayFor(model => model.FirstOrDefault().Vehicle.Description)
+                </span>
+            </div>
+            <button class="button">Contact to +123-456-7890 or +111-222-3333 for more information</button>
+
+        </div>
+    </div>
+
+        </div>
+

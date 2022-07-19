@@ -1,0 +1,195 @@
+﻿@model IEnumerable<Vehicle_ShowRoom_Manager_System.Models.Vehicle>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<section class="home" id="home">
+
+    <h3 data-speed="-2" class="home-parallax">find your car</h3>
+
+    <img data-speed="5" class="home-parallax" src="~/image/home-img.png" alt="">
+
+    <a data-speed="7" href="~/Home/ViewAll" class="btn home-parallax">explore cars</a>
+    <div class="search-form">
+        @using (Html.BeginForm("search", "Home", FormMethod.Get, new { @class = "search-bar" }))
+        {
+            string search = ""; 
+            @Html.TextBox("search", search, new { placeholder = "I am looking for..."});
+            <button type="submit"><img src="~/image/search.jpg"></button>
+        }
+    </div>
+</section>
+
+<section class="icons-container">
+
+    <div class="icons">
+        <i class="fas fa-home"></i>
+        <div class="content">
+            <h3>150+</h3>
+            <p>branches</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-car"></i>
+        <div class="content">
+            <h3>4770+</h3>
+            <p>cars sold</p>
+        </div>
+    </div>
+
+
+
+    <div class="icons">
+        <i class="fas fa-car"></i>
+        <div class="content">
+            <h3>1500+</h3>
+            <p>news cars</p>
+        </div>
+    </div>
+
+</section>
+
+<section class="vehicles" id="vehicles">
+
+    <h1 class="heading"> popular <span>vehicles</span> </h1>
+
+    <div class="swiper vehicles-slider">
+
+        <div class="swiper-wrapper">
+            @foreach (var item in Model.Take(6))
+            {
+                <div class="swiper-slide box">
+                    <img src="@Html.DisplayFor(modelItem => item.VehicleImg.FirstOrDefault().ImgPath)" alt="">
+                    <div class="content">
+                        <h3>@Html.DisplayFor(modelItem => item.VehicleName)</h3>
+                        <div class="price"> <span>price : </span> @Html.DisplayFor(modelItem => item.Price) vnđ</div>
+
+                        @Html.ActionLink("check out", "CarDetail", "Home", new {id = item.VehicleId }, new { @class = "btn" })
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="swiper-pagination"></div>
+
+    </div>
+
+</section>
+
+
+
+        <section class="featured" id="featured">
+
+            <h1 class="heading"> <span>featured</span> cars </h1>
+
+            <div class="swiper featured-slider">
+
+                <div class="swiper-wrapper">
+                    @foreach (var item in Model.Take(4))
+                    {
+                        <div class="swiper-slide box">
+                            <img src="@Html.DisplayFor(modelItem => item.VehicleImg.FirstOrDefault().ImgPath)" alt="">
+                            <div class="content">
+                                <h3>@Html.DisplayFor(modelItem => item.VehicleName)</h3>
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <div class="price">@Html.DisplayFor(modelItem => item.Price) vnđ</div>
+                                @Html.ActionLink("check out", "CarDetail", "Home", new { id = item.VehicleId }, new { @class = "btn" })
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+                <div class="swiper-pagination"></div>
+
+            </div>
+
+            <div class="swiper featured-slider">
+
+                <div class="swiper-wrapper">
+                    @foreach (var item in Model.Skip(4).Take(4))
+            {
+                    <div class="swiper-slide box">
+                        <img src="@Html.DisplayFor(modelItem => item.VehicleImg.FirstOrDefault().ImgPath)" alt="">
+                        <div class="content">
+                            <h3>@Html.DisplayFor(modelItem => item.VehicleName)</h3>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="price">@Html.DisplayFor(modelItem => item.Price) vnđ</div>
+                            @Html.ActionLink("check out", "CarDetail", "Home", new { id = item.VehicleId }, new { @class = "btn" })
+                        </div>
+                    </div>
+            }                
+                </div>
+
+                <div class="swiper-pagination"></div>
+
+            </div>
+            <div class="viewall">
+                <a href="~/Home/ViewAll" class="btViewAll">View All</a>
+            </div>
+        </section>
+
+        <section class="newsletter">
+
+            <h3>subscribe for latest updates</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, suscipit.</p>
+
+            <form action="">
+                <input type="email" placeholder="enter your email">
+                <input type="submit" value="subscribe">
+            </form>
+
+        </section>
+
+
+
+        <section class="contact" id="contact">
+
+            <h1 class="heading"><span>contact</span> us</h1>
+
+            <div class="row">
+
+                <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.7294311284604!2d105.84769451467754!3d21.00348029401732!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ad58455db2ab%3A0x9b3550bc22fd8bb!2zNTQgUC4gTMOqIFRoYW5oIE5naOG7iywgQsOhY2ggS2hvYSwgSGFpIELDoCBUcsawbmcsIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1652712925855!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">" allowfullscreen="" loading="lazy"></iframe>
+
+                <form action="">
+                    <h3>get in touch</h3>
+                    <input type="text" placeholder="your name" class="box">
+                    <input type="email" placeholder="your email" class="box">
+                    <input type="tel" placeholder="subject" class="box">
+                    <textarea placeholder="your message" class="box" cols="30" rows="10"></textarea>
+                    <input type="submit" value="send message" class="btn">
+                </form>
+
+            </div>
+
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

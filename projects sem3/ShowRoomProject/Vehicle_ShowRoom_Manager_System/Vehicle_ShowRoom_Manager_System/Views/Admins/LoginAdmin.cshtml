@@ -1,0 +1,68 @@
+﻿@using Vehicle_ShowRoom_Manager_System.Models
+@model LoginAdmin
+@{
+    ViewBag.Title = "LoginAdmin";
+}
+<style>
+    .login {
+        margin-top: 50px;
+        background-color: white;
+        opacity: 0.7;
+        height: 560px;
+        width: 350px;
+        border-radius:5px;
+    }
+    h2 {
+        text-align: center;
+        font-family: Cooper;
+        padding-top: 10px;
+    }
+    label{
+        padding-left:30px;
+        width:700px;
+    }
+    .checkbox {
+        padding-left: 30px;
+        font-size: 15px;
+        font-family: Helvetica;
+    }
+    .button input {
+        margin-left: 30px;
+        width: 700px;
+        background-color:aqua;
+        color:brown;
+        font-family: Arial;
+    }
+</style>
+<body >
+    <div class="login">
+        @using (Html.BeginForm("LoginAdmin", "Admins", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <h2>Login Admin</h2>
+            <br />
+
+            <div>
+                <label>
+                    @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", @placeholder = "Enter your Email", @autofocus = "autofocus" })
+                </label>
+                <br />
+                <label>
+                     @Html.TextBoxFor(Model => Model.Password, new { @class = "form-control", @placeholder = "Enter your Password", @type = "password" })
+                </label>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(Model => Model.RememberMe)
+                        Remember 
+                    </label>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Log In" />
+                </div>
+                <div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+    </div>
+</body>
